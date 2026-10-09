@@ -366,3 +366,43 @@ $\sqrt{M_0M_{-1}}$ cho cùng độ chính xác với AGM hai bước, một kế
   trọng số**.
 - Cần kiểm tài liệu: biểu diễn chu kỳ qua $\int d\theta/\sqrt K$ là chuẩn. Việc gọi tên "trung bình lũy thừa" và đồng nhất
   $M_1$ với cân bằng điều hòa thì mình chưa thấy ở đâu, nhưng chưa tra kỹ.
+
+## 10. Công thức tần số hữu tỷ đúng ở cả hai đầu (Padé hai điểm)
+
+Script: `closed_form.py` (khoảng 12 s). Kết quả: `closed_form.txt`, bảng hệ số `closed_form_coefficients.csv`.
+
+Từ $\omega^2=(\mathbb E[(1+qH)^{-1/2}])^{-2}$ khai triển được chính xác ở cả hai đầu ($\mu_k=\mathbb E H^k$):
+$$
+q\to0:\ \lambda=L_0+L_1q+L_2q^2+\dots,\quad L_0=\mu_1,\ L_1=-\tfrac34(\mu_2-\mu_1^2),\ L_2=\tfrac58\mu_3-\tfrac98\mu_1\mu_2+\tfrac12\mu_1^3;
+$$
+$$
+q\to\infty:\ \lambda=\lambda_\infty+\frac{C_\infty}q+\dots,\qquad C_\infty=\lambda_\infty^{3/2}\,\mathbb E[H^{-3/2}]-1 .
+$$
+Với Duffing: $L_1=-3/128$, $L_2=9/512$ (khớp Lindstedt), $\lambda_\infty=0{,}717770$, $C_\infty=0{,}045753$.
+
+**Padé hai điểm [2/2]:**
+$$
+\lambda(q)\approx\frac{L_0+a_1q+\lambda_\infty b_2q^2}{1+b_1q+b_2q^2},
+$$
+khớp đúng 5 thông tin trên. Ba hệ số $a_1,b_1,b_2$ giải được dạng đóng từ chúng, **không có tham số khớp số**:
+$b_1=\dfrac{L_2+dL_1/C_\infty}{-d^2/C_\infty-L_1}$ với $d=L_0-\lambda_\infty$, rồi $a_1=L_1+L_0b_1$ và $b_2=(L_1+db_1)/C_\infty$.
+
+**Độ chính xác** (sai số tần số lớn nhất trên $10^{-5}\le q\le10^9$; bảng 19 giá trị $\alpha$ trong `closed_form.txt`):
+
+| $\alpha$ | 0,1–2 | 3 (Duffing) | 5 | 7 | 11 | 20 |
+|---|---|---|---|---|---|---|
+| sai số | $\le0{,}00002\,\%$ | **0,000048 %** | 0,00074 % | 0,0029 % | 0,012 % | 0,054 % |
+
+So với các công thức Duffing đã biết: AGM hai bước 0,0014 %, cân bằng điều hòa hữu tỷ bậc hai (Beléndez et al. 2009)
+0,0055 %, công thức hữu tỷ một hệ số ở mục 5 là 0,0074 %. Công thức mới chính xác hơn AGM hai bước khoảng 29 lần, và
+dùng được cho mọi $\alpha$, kể cả $\alpha<1$, nơi không có AGM. Trong mọi phép thử, sai số luôn $\ge0$ (đánh giá cao rất
+nhẹ); đây mới là quan sát số.
+
+**Cách dùng:** với mỗi $\alpha$ chỉ cần 5 hằng số. $L_0$ và $\lambda_\infty$ có dạng Gamma; $\mu_2$, $\mu_3$ và
+$\mathbb E H^{-3/2}$ là tích phân một lớp của hàm sơ cấp, tính một lần rồi lập bảng (`closed_form_coefficients.csv`).
+Sau đó $\omega(A)$ ở mọi biên độ là một phân thức hữu tỷ, không cần tích phân.
+
+**Kiểm tài liệu:** Padé hai điểm là kỹ thuật chuẩn. Một lần tìm kiếm chưa thấy bài nào áp dụng nó cho quan hệ tần
+số–biên độ của dao động tử lũy thừa với đúng 5 thông tin chính xác này. Cần tra kỹ hơn trước khi khẳng định là mới.
+Điều này sửa lại nhận định ở mục 5 và 6.1: dạng hữu tỷ **một** hệ số thua các kết quả đã biết, nhưng dạng [2/2] khớp
+cả hai đầu thì vượt chúng.
