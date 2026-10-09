@@ -29,6 +29,10 @@ the nonlinear to the linear restoring force at the amplitude), and places each o
   bracket $(\lambda_\infty,\lambda_0)$ for every $\alpha$; the parameters that reproduce it are $s^\ast\approx2.05$
   (Anh 2017) and $p^\ast\approx0.48$ (Nguyen–Anh 2020) for the cubic case, close to the values used in those papers,
   and they vary with $\alpha$. The exponent $n$ of the superellipse family in Nguyen et al. (2025) barely changes $\lambda$.
+- **Why the minimax constant sits at 14–17 %** (`minimax_explained.py`): balancing the large-amplitude overestimate
+  against the intermediate underestimate gives $\delta=\max_u(\varphi(u)-\delta)u$; with the two-limit profile this
+  depends only on $\beta=\tfrac34\mathrm{Var}(H)/(\lambda_\infty(\lambda_0-\lambda_\infty))$, and $\beta=1$ gives
+  $\delta=3-2\sqrt2\approx0.1716$. The model matches the measured position to $10^{-3}$ for all $\alpha\le11$.
 - **Two-point Padé frequency formula** (`closed_form.py`): exact expansions at both ends ($q\to0$ to order $q^2$,
   $q\to\infty$ to order $1/q$) fix a [2/2] rational $\lambda(q)$ with no fitted parameter. Max frequency error:
   0.000048 % for Duffing (two AGM steps: 0.0014 %; rational harmonic balance, Beléndez et al. 2009: 0.0055 %),
@@ -63,6 +67,7 @@ Full statements, proofs, the complete table and the literature check are in [`NO
 | `parameter_selection.py`, `parameter_selection.txt` | Minimax constant and optimal operator parameters $s^\ast$, $p^\ast$, $n^\ast$ for 14 values of $\alpha$. |
 | `closed_form.py`, `closed_form.txt`, `closed_form_coefficients.csv` | Two-point Padé formula and its constants for 19 values of $\alpha$. |
 | `power_mean_linearization.py`, `power_mean_linearization.txt` | Power-mean linearization: end-point orders $r_0$, $r_\infty$, optimal $r^\ast$ and the universal $r=0.44$. |
+| `minimax_explained.py`, `minimax_explained.txt` | Model $\delta(\beta)$ for the position of the minimax constant, checked against the measured values. |
 | `power_mean_view.py`, `power_mean_view.txt` | Power-mean bounds and parameter-free formulas for Duffing, $x+x^7$, $x+x^3+x^5$, pendulum, Duffing–harmonic. |
 | `validation/duffing_weighted_averaging.py` | Cubic Duffing with the Anh–Hai–Hieu (2017) operator, $s=2$, against the exact frequency. |
 | `validation/duffing_wao_2025.py` | Implementation of the Nguyen–Anh (2020) and Nguyen et al. (2025) operators; reproduces Table 7 of the 2020 paper and Tables 4–5 of the 2025 paper. |

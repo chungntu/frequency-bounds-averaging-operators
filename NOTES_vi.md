@@ -449,3 +449,37 @@ Với $r=1$ ta được đúng cách cổ điển. Với $r\ne1$, $\lambda$ **t�
 thức Padé ở mục 10 và kém chính xác hơn nó. Giá trị của mục này là **ở mức toán tử**, trong đúng khung tuyến tính hóa
 tương đương: thêm đúng một tham số phổ quát $r\approx0{,}44$ là vượt mọi toán tử tuyến tính. Giá trị $0{,}44$ mới là quan
 sát số, chưa có giải thích lý thuyết đầy đủ.
+
+## 12. Vì sao hằng số minimax nằm ở khoảng 16–17 % (giải thích mục 8)
+
+Script: `minimax_explained.py` (khoảng 10 s). Kết quả: `minimax_explained.txt`.
+
+Viết $\lambda(q)=\lambda_\infty+D\,\varphi(q)$ với $D=\lambda_0-\lambda_\infty$, trong đó $\varphi$ giảm từ 1 về 0, và xét
+hằng số $\lambda_c=\lambda_\infty+\delta D$. Khi $D$ nhỏ, sai số tần số xấp xỉ
+$$
+e(q)\approx\frac{D}{2\lambda_\infty}\,\big(\delta-\varphi(q)\big)\,u,\qquad u=\frac{\lambda_\infty q}{1+\lambda_\infty q}\in(0,1).
+$$
+- Sai số dương lớn nhất đạt khi $q\to\infty$ ($u\to1$) và tỷ lệ với $\delta$.
+- Sai số âm lớn nhất tỷ lệ với $\max_u(\varphi-\delta)u$.
+- Minimax cân bằng hai giá trị này: $\ \delta=\max_u\,(\varphi(u)-\delta)\,u$.
+
+Dùng dáng hai giới hạn của mục 5, $\varphi=1/(1+bq)$ với $b=\tfrac34\operatorname{Var}(H)/D$. Đổi sang biến $u$:
+$$
+\varphi(u)=\frac{1-u}{1-u+\beta u},\qquad \beta=\frac{\tfrac34\operatorname{Var}(H)}{\lambda_\infty(\lambda_0-\lambda_\infty)} .
+$$
+$\beta$ là tỷ số giữa tốc độ giảm ban đầu của $\lambda$ và độ rộng khoảng, chuẩn hóa theo $\lambda_\infty$.
+**Khi $\beta=1$**, $\varphi=1-u$ và điều kiện minimax thành $\delta=(1-\delta)^2/4$, nên
+$$
+\boxed{\ \delta=3-2\sqrt2\approx0{,}1716\ }
+$$
+
+**Kiểm số:** mô hình $\delta(\beta)$ khớp vị trí minimax đo được tới $10^{-4}$ khi $\alpha\le5$, và lệch tối đa $0{,}001$
+ở $\alpha=11$. Với $0{,}5\le\alpha\le5$ thì $\beta\in[0{,}98;\,1{,}13]$, nên $\delta$ gần $3-2\sqrt2$. Khi $\alpha$ lớn thì
+$\beta$ tăng (đến 1,59 ở $\alpha=11$), nên $\delta$ giảm (đến 0,14). Điều này giải thích dải 0,14–0,17 ở mục 8.
+
+**Hệ quả thực hành:** quy tắc $\lambda\approx\lambda_\infty+0{,}16(\lambda_0-\lambda_\infty)$ có thể thay bằng
+$\lambda\approx\lambda_\infty+\delta(\beta)(\lambda_0-\lambda_\infty)$ với $\delta(\beta)$ tính theo công thức trên. Với
+Duffing, quy tắc rút gọn là $\lambda_{\rm mm}\approx\lambda_\infty+(3-2\sqrt2)(\tfrac34-\lambda_\infty)=0{,}72330$, so với giá trị
+đúng 0,72327.
+
+Câu hỏi còn mở: giải thích tương tự cho bậc phổ quát $r^\ast\approx0{,}44$ ở mục 11.
