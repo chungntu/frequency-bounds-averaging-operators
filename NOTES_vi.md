@@ -483,3 +483,31 @@ Duffing, quy tắc rút gọn là $\lambda_{\rm mm}\approx\lambda_\infty+(3-2\sq
 đúng 0,72327.
 
 Câu hỏi còn mở: giải thích tương tự cho bậc phổ quát $r^\ast\approx0{,}44$ ở mục 11.
+
+## 13. Kiểm tra tài liệu cho các mục 2, 9–12
+
+Tra cứu ngày 09/10/2026, đọc toàn văn các bài arXiv liên quan.
+
+| Khẳng định | Kết luận | Tài liệu gần nhất |
+|---|---|---|
+| Bổ đề 1 (chu kỳ $=4\int K^{-1/2}d\theta$, tức $\omega^2=M_{-1/2}(K)$) | **Đã biết** | Amore & Fernández, *Eur. J. Phys.* 26 (2005) 589, doi:10.1088/0143-0807/26/4/004, arXiv:math-ph/0409034; Amore, Aranda, Sáenz, Fernández, *Phys. Rev. E* 71 (2005) 016704, arXiv:math-ph/0407014 |
+| $M_1(K)$ = cân bằng điều hòa bậc nhất (mục 9) | **Một phần đã có** | Amore & Sáenz, *Europhys. Lett.* 70 (2005) 425, arXiv:math-ph/0405030: bước đầu của phương pháp PMS cho đúng $\omega^2=\mathbb E_\theta K$ và tái lập các giá trị cân bằng điều hòa (Duffing, con lắc), nhưng không phát biểu đồng nhất thức cho $g$ tổng quát và không có phép tích phân từng phần |
+| $M_{-1}<\omega^2<M_0<M_1$ cho mọi $g$ (mục 9) | **Chưa thấy**, trừ cận $M_1$ (Benguria & Depassier 1996) | **Rủi ro chưa kiểm:** Depassier & Haikala, *J. Sound Vib.* 328 (2009) 338–344, doi:10.1016/j.jsv.2009.08.019, có cận trên và cận dưới dạng đóng cho chu kỳ. Bài không có bản mở; cần đọc để xem cận dưới của họ có trùng $M_{-1}$ hay $M_0$ không |
+| Công thức $M_1^{1/4}M_{-1}^{3/4}$, $\sqrt{M_0M_{-1}}$ cho $g$ tổng quát (mục 9) | **Chưa thấy** (riêng Duffing trùng AGM, đã biết) | Villarino, arXiv:1202.2782; Carvalhaes & Suppes 2008 (trung bình của $(1,k')$, không phải của $K(\theta)$) |
+| Định lý 2: $\omega^2$ lõm, $\lambda(q)$ giảm (mục 2) | **Chưa thấy phát biểu**, nhưng là hệ quả ngắn | Tính lõm suy ra ngay từ việc trung bình lũy thừa bậc $\le1$ là hàm lõm (Bullen, *Handbook of Means*), hoặc từ nguyên lý biến phân của Benguria & Depassier (1996). Nên trình bày như một hệ quả và trích dẫn hai nguồn này |
+| Padé hai điểm (mục 10), trung bình lũy thừa $r\approx0{,}44$ (mục 11), giải thích $3-2\sqrt2$ (mục 12) | Chưa thấy | Hai lần tìm kiếm, chưa tra hệ thống |
+
+**Lưu ý thêm:**
+- Một bản tóm tắt tìm kiếm cho rằng Hu & Tang, *J. Sound Vib.* 294 (2006) 637–639, nói cân bằng điều hòa đánh giá thấp
+  tần số của dao động tử Duffing–điều hòa khi biên độ lớn. Điều này chưa xác nhận được, và mâu thuẫn với kiểm số ở mục 9
+  (cân bằng điều hòa trên chính phương trình $\ddot x+g(x)=0$ luôn đánh giá cao). Nếu đúng là họ nói vậy, rất có thể họ
+  áp dụng cân bằng điều hòa cho phương trình đã biến đổi $(1+x^2)\ddot x+x^3=0$. Khi viết bài nên chú thích rõ điểm này.
+- Nên trích dẫn thêm: Anh et al., *Nonlinear Dyn.* 111 (2023) 997–1017, doi:10.1007/s11071-022-07894-6 (tuyến tính hóa
+  đối ngẫu cho dao động tự do tất định).
+
+**Cách viết đề xuất:**
+- Bổ đề 1 ghi là đã biết, trích Amore & Fernández.
+- Đồng nhất $M_1$ với cân bằng điều hòa ghi là "đã ngầm có trong Amore & Sáenz (2005); ở đây phát biểu cho $g$ tổng quát kèm chứng minh".
+- Bất đẳng thức trung bình lũy thừa và Định lý 2 trình bày như hệ quả ngắn của các bất đẳng thức chuẩn.
+- Trọng tâm mới đặt vào: Padé hai điểm, trung bình lũy thừa với $r\approx0{,}44$, quy tắc chọn tham số và giải thích $3-2\sqrt2$.
+- Trước khi nộp phải đọc Depassier & Haikala (2009).
