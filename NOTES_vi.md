@@ -406,3 +406,46 @@ Sau đó $\omega(A)$ ở mọi biên độ là một phân thức hữu tỷ, kh
 số–biên độ của dao động tử lũy thừa với đúng 5 thông tin chính xác này. Cần tra kỹ hơn trước khi khẳng định là mới.
 Điều này sửa lại nhận định ở mục 5 và 6.1: dạng hữu tỷ **một** hệ số thua các kết quả đã biết, nhưng dạng [2/2] khớp
 cả hai đầu thì vượt chúng.
+
+## 11. Tuyến tính hóa bằng trung bình lũy thừa (toán tử phi tuyến)
+
+Script: `power_mean_linearization.py` (khoảng 4 s). Kết quả: `power_mean_linearization.txt`.
+
+Tuyến tính hóa cổ điển với nghiệm thử $x=A\cos t$ cho $k=\langle g(x)x\rangle/\langle x^2\rangle$. Đó là **trung bình cộng**
+của độ cứng cát tuyến $k_s=g(x)/x$ với trọng số $x^2\propto\cos^2t$. Mọi toán tử trung bình *tuyến tính* (kể cả các toán
+tử có trọng số ở mục 4) đều chỉ cho một hằng số $\lambda$ (mục 0 và 9).
+
+**Đề xuất:** giữ nguyên nghiệm thử và trọng số $\cos^2t$, chỉ thay trung bình cộng bằng **trung bình lũy thừa bậc $r$**:
+$$
+\frac{\omega^2}{\omega_0^2}=M^{(\cos^2)}_r\big(1+q|\cos t|^{\alpha-1}\big)=\Big(\mathbb E_w\big[(1+q|\cos t|^{\alpha-1})^r\big]\Big)^{1/r}.
+$$
+Với $r=1$ ta được đúng cách cổ điển. Với $r\ne1$, $\lambda$ **tự thay đổi theo biên độ** mà không cần thêm tham số nào.
+
+**Kết quả** (sai số tần số lớn nhất trên $10^{-3}\le q\le10^7$):
+
+| $\alpha$ | $r_0$ (đầu $q\to0$) | $r_\infty$ (đầu $q\to\infty$) | $r^\ast$ tối ưu | sai số $r^\ast$ | sai số $r=0{,}44$ | hằng số minimax | cổ điển |
+|---|---|---|---|---|---|---|---|
+| 0,5 | 0,539 | 0,431 | 0,441 | 0,005 % | 0,006 % | 0,052 % | 0,31 % |
+| 2 | 0,321 | 0,453 | 0,438 | 0,022 % | 0,023 % | 0,126 % | 0,73 % |
+| 3 | **0,250** | 0,461 | 0,437 | 0,116 % | 0,122 % | 0,382 % | 2,22 % |
+| 5 | 0,167 | 0,470 | 0,437 | 0,47 % | 0,49 % | 0,98 % | 5,86 % |
+| 7 | 0,118 | 0,475 | 0,437 | 0,93 % | 0,95 % | 1,54 % | 9,56 % |
+| 11 | 0,061 | 0,480 | 0,439 | 1,86 % | 1,88 % | 2,47 % | 16,4 % |
+
+(Bảng đủ 14 giá trị $\alpha$ trong `power_mean_linearization.txt`.)
+
+**Nhận xét:**
+1. **Bậc tối ưu gần như phổ quát:** $r^\ast\in[0{,}437;\,0{,}442]$ với mọi $\alpha$ từ 0,1 đến 11. Một bậc chung $r=0{,}44$
+   chỉ kém tối ưu tối đa 0,024 điểm %, và tốt hơn hằng số minimax (tốt nhất trong mọi toán tử tuyến tính) ở 14/14
+   giá trị $\alpha$. Với Duffing, sai số giảm từ 0,38 % xuống 0,12 %.
+2. **Vì sao gần phổ quát.** Khi $q\to0$, mọi bậc $r$ đều khớp bậc nhất ($\lambda\to\lambda_0$), nên sai số ở biên độ nhỏ
+   vốn nhỏ. Độ chính xác do đầu $q\to\infty$ quyết định, nơi bậc đúng $r_\infty$ chỉ thay đổi trong 0,42–0,49, và
+   tiến dần về khoảng 0,49 khi $\alpha=40$. $r^\ast$ là điểm cân bằng sai số giữa hai đầu.
+3. **Duffing có $r_0=1/4$ chính xác:** $r_0=1-\tfrac32\operatorname{Var}_\theta(H)/\operatorname{Var}_w(\cos^2)=1-\tfrac32\cdot\tfrac{1/32}{1/16}=\tfrac14$.
+4. **Ý nghĩa với các toán tử có trọng số:** hướng mở rộng tự nhiên là kết hợp trọng số của các bài 2017, 2020, 2025 với
+   trung bình bậc $r$. Toán tử tuyến tính ($r=1$) bị giới hạn ở một hằng số, còn trung bình lũy thừa vượt được giới hạn đó.
+
+**Hạn chế:** ngoài $r=1$, trung bình này cần một tích phân số (với Duffing là hàm siêu bội), nên không gọn bằng công
+thức Padé ở mục 10 và kém chính xác hơn nó. Giá trị của mục này là **ở mức toán tử**, trong đúng khung tuyến tính hóa
+tương đương: thêm đúng một tham số phổ quát $r\approx0{,}44$ là vượt mọi toán tử tuyến tính. Giá trị $0{,}44$ mới là quan
+sát số, chưa có giải thích lý thuyết đầy đủ.

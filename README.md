@@ -34,6 +34,10 @@ the nonlinear to the linear restoring force at the amplitude), and places each o
   0.000048 % for Duffing (two AGM steps: 0.0014 %; rational harmonic balance, Beléndez et al. 2009: 0.0055 %),
   $\le0.012$ % for $\alpha\le11$, 0.054 % for $\alpha=20$. Five constants per $\alpha$ are tabulated in
   `closed_form_coefficients.csv`.
+- **Power-mean linearization** (`power_mean_linearization.py`): keep the harmonic trial solution and the $x^2$ weight
+  of classical linearization, but replace the arithmetic mean of the secant stiffness $g(x)/x$ by a power mean of
+  order $r$. The optimal order is nearly universal, $r^\ast\in[0.437,0.442]$ for $0.1\le\alpha\le11$, and a single
+  $r=0.44$ beats the best constant (minimax) linear operator for all 14 values of $\alpha$ (Duffing: 0.12 % vs 0.38 %).
 - **Power-mean view** (`power_mean_view.py`): for any odd restoring force, with the energy chord stiffness $K(\theta)$,
   the exact $\omega^2$ is the power mean of order $-1/2$ of $K$, classical linearization is the arithmetic mean, and
   $M_{-1}(K)<\omega^2<M_0(K)<M_1(K)$. The parameter-free combination $\sqrt{M_0M_{-1}}$ is accurate to
@@ -44,7 +48,7 @@ The upper bound $\omega\le\sqrt{\omega_0^2+\lambda_0\gamma A^{\alpha-1}}$ (class
 harmonic balance overestimates the frequency) is due to Benguria and Depassier (1996), for any odd nonlinearity.
 The theorem above sharpens it: their bound is the $q\to0$ end of a monotone function whose other end is
 $\lambda_\infty$. Rational harmonic balance (Beléndez et al. 2009) and the arithmetic–geometric mean give accurate
-Duffing frequencies; the two-point Padé formula below improves on both and covers every $\alpha$.
+Duffing frequencies; the two-point Padé formula listed above improves on both and covers every $\alpha$.
 
 Full statements, proofs, the complete table and the literature check are in [`NOTES_vi.md`](NOTES_vi.md)
 (Vietnamese).
@@ -58,6 +62,7 @@ Full statements, proofs, the complete table and the literature check are in [`NO
 | `NOTES_vi.md` | Notes with proofs, the full placement table and the literature check (Vietnamese). |
 | `parameter_selection.py`, `parameter_selection.txt` | Minimax constant and optimal operator parameters $s^\ast$, $p^\ast$, $n^\ast$ for 14 values of $\alpha$. |
 | `closed_form.py`, `closed_form.txt`, `closed_form_coefficients.csv` | Two-point Padé formula and its constants for 19 values of $\alpha$. |
+| `power_mean_linearization.py`, `power_mean_linearization.txt` | Power-mean linearization: end-point orders $r_0$, $r_\infty$, optimal $r^\ast$ and the universal $r=0.44$. |
 | `power_mean_view.py`, `power_mean_view.txt` | Power-mean bounds and parameter-free formulas for Duffing, $x+x^7$, $x+x^3+x^5$, pendulum, Duffing–harmonic. |
 | `validation/duffing_weighted_averaging.py` | Cubic Duffing with the Anh–Hai–Hieu (2017) operator, $s=2$, against the exact frequency. |
 | `validation/duffing_wao_2025.py` | Implementation of the Nguyen–Anh (2020) and Nguyen et al. (2025) operators; reproduces Table 7 of the 2020 paper and Tables 4–5 of the 2025 paper. |
