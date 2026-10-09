@@ -1,0 +1,174 @@
+1. Biểu diễn 1/w = E[(1+qH)^(-1/2)]: khớp elliptic (alpha=3) tới 1e-11, khớp ODE (alpha=0.5, 2.5, 7) tới 9.1e-13.
+2. lam0 = 2<|cos|^(alpha+1)> (tuyến tính hóa cổ điển); lamInf = tần số dao động thuần lũy thừa (công thức Gamma); lam'(0) = -(3/4)Var(H). Duffing: lam0 = 3/4, lamInf = 0.717770, lam'(0) = -3/128.
+3. lam(q) giảm ngặt trên 400 điểm 1e-3 <= q <= 1e6 với mọi alpha trong [0.1, 0.25, 0.5, 0.75, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 7.0, 9.0, 10.0, 11.0] (bước tăng lớn nhất -7.32e-11 < 0) và nằm trong (lamInf, lam0).
+3b. Đa thức hỗn hợp x + q3 x^3 + q5 x^5: chặn hai phía đúng ở 25/25 điểm (biểu diễn khớp ODE tới 1e-9).
+3c. Lò xo mềm (q < 0, trước khi mất dao động): cổ điển vẫn đánh giá cao tần số: alpha=3 q=-0.2: +0.065%; alpha=3 q=-0.5: +0.767%; alpha=3 q=-0.9: +12.587%; alpha=0.5 q=-0.3: +0.084%; alpha=0.5 q=-0.6: +1.541%
+
+4. Xếp chỗ các toán tử. Sai số tần số trên 1e-3 <= q <= 1e6 (min/max, %).
+   Quy tắc: lam_op >= lam0 -> luôn đánh giá cao; lam_op <= lamInf -> luôn đánh giá thấp; ở giữa -> đúng tại một q* duy nhất.
+
+alpha = 0.1    lam0 = 1.23582  lamInf = 1.20617  (độ rộng khoảng 2.40% của lam0)
+   toán tử                 lam  vị trí          dấu sai số w             q*     sai số w (%)
+   Cổ điển             1.23582  trên/bằng lam0  luôn dương                -  +0.000.. +1.222
+   Anh 2017 s=2        1.25059  trên/bằng lam0  luôn dương                -  +0.001.. +1.825
+   WLAO 2020 p=0.25    1.22075  trong khoảng    đổi dấu một lần       0.759  -0.072.. +0.603
+   WLAO 2020 p=0.5     1.20675  trong khoảng    đổi dấu một lần          37  -0.276.. +0.024
+   WLAO 2020 p=1       1.18155  dưới lamInf     luôn âm                   -  -1.027.. -0.003
+   WEL 2025            1.18180  dưới lamInf     luôn âm                   -  -1.017.. -0.003
+   lamInf (cận)        1.20617                                               -0.288.. -0.000
+   Hữu tỷ 2 đầu        b=1.378                                               -0.003.. -0.000
+
+alpha = 0.25   lam0 = 1.18523  lamInf = 1.16679  (độ rộng khoảng 1.56% của lam0)
+   toán tử                 lam  vị trí          dấu sai số w             q*     sai số w (%)
+   Cổ điển             1.18523  trên/bằng lam0  luôn dương                -  +0.000.. +0.787
+   Anh 2017 s=2        1.19785  trên/bằng lam0  luôn dương                -  +0.001.. +1.322
+   WLAO 2020 p=0.25    1.17360  trong khoảng    đổi dấu một lần        1.34  -0.073.. +0.291
+   WLAO 2020 p=0.5     1.16280  dưới lamInf     luôn âm                   -  -0.282.. -0.001
+   WLAO 2020 p=1       1.14334  dưới lamInf     luôn âm                   -  -1.010.. -0.002
+   WEL 2025            1.14353  dưới lamInf     luôn âm                   -  -1.002.. -0.002
+   lamInf (cận)        1.16679                                               -0.188.. -0.000
+   Hữu tỷ 2 đầu        b=1.285                                               -0.001.. -0.000
+
+alpha = 0.5    lam0 = 1.11284  lamInf = 1.10594  (độ rộng khoảng 0.62% của lam0)
+   toán tử                 lam  vị trí          dấu sai số w             q*     sai số w (%)
+   Cổ điển             1.11284  trên/bằng lam0  luôn dương                -  +0.000.. +0.311
+   Anh 2017 s=2        1.12145  trên/bằng lam0  luôn dương                -  +0.000.. +0.699
+   WLAO 2020 p=0.25    1.10595  trong khoảng    đổi dấu một lần         468  -0.076.. +0.001
+   WLAO 2020 p=0.5     1.09955  dưới lamInf     luôn âm                   -  -0.289.. -0.001
+   WLAO 2020 p=1       1.08801  dưới lamInf     luôn âm                   -  -0.814.. -0.001
+   WEL 2025            1.08811  dưới lamInf     luôn âm                   -  -0.809.. -0.001
+   lamInf (cận)        1.10594                                               -0.076.. -0.000
+   Hữu tỷ 2 đầu        b=1.164                                               -0.000.. -0.000
+
+alpha = 0.75   lam0 = 1.05201  lamInf = 1.05054  (độ rộng khoảng 0.14% của lam0)
+   toán tử                 lam  vị trí          dấu sai số w             q*     sai số w (%)
+   Cổ điển             1.05201  trên/bằng lam0  luôn dương                -  +0.000.. +0.070
+   Anh 2017 s=2        1.05635  trên/bằng lam0  luôn dương                -  +0.000.. +0.276
+   WLAO 2020 p=0.25    1.04892  dưới lamInf     luôn âm                   -  -0.077.. -0.000
+   WLAO 2020 p=0.5     1.04604  dưới lamInf     luôn âm                   -  -0.214.. -0.000
+   WLAO 2020 p=1       1.04084  dưới lamInf     luôn âm                   -  -0.462.. -0.001
+   WEL 2025            1.04089  dưới lamInf     luôn âm                   -  -0.460.. -0.001
+   lamInf (cận)        1.05054                                               -0.017.. -0.000
+   Hữu tỷ 2 đầu        b=1.072                                               -0.000.. -0.000
+
+alpha = 1.5    lam0 = 0.91531  lamInf = 0.91144  (độ rộng khoảng 0.42% của lam0)
+   toán tử                 lam  vị trí          dấu sai số w             q*     sai số w (%)
+   Cổ điển             0.91531  trên/bằng lam0  luôn dương                -  +0.000.. +0.212
+   Anh 2017 s=2        0.90684  dưới lamInf     luôn âm                   -  -0.253.. -0.000
+   WLAO 2020 p=0.25    0.91025  dưới lamInf     luôn âm                   -  -0.091.. -0.000
+   WLAO 2020 p=0.5     0.90479  dưới lamInf     luôn âm                   -  -0.365.. -0.001
+   WLAO 2020 p=1       0.89246  dưới lamInf     luôn âm                   -  -1.047.. -0.001
+   WEL 2025            0.89258  dưới lamInf     luôn âm                   -  -1.040.. -0.001
+   lamInf (cận)        0.91144                                               -0.054.. -0.000
+   Hữu tỷ 2 đầu        b=0.895                                               -0.000.. -0.000
+
+alpha = 2      lam0 = 0.84883  lamInf = 0.83664  (độ rộng khoảng 1.44% của lam0)
+   toán tử                 lam  vị trí          dấu sai số w             q*     sai số w (%)
+   Cổ điển             0.84883  trên/bằng lam0  luôn dương                -  +0.000.. +0.726
+   Anh 2017 s=2        0.83247  dưới lamInf     luôn âm                   -  -0.330.. -0.001
+   WLAO 2020 p=0.25    0.84015  trong khoảng    đổi dấu một lần        3.03  -0.093.. +0.210
+   WLAO 2020 p=0.5     0.83081  dưới lamInf     luôn âm                   -  -0.401.. -0.001
+   WLAO 2020 p=1       0.80973  dưới lamInf     luôn âm                   -  -1.621.. -0.002
+   WEL 2025            0.80992  dưới lamInf     luôn âm                   -  -1.610.. -0.002
+   lamInf (cận)        0.83664                                               -0.184.. -0.000
+   Hữu tỷ 2 đầu        b=0.822                                               -0.001.. -0.000
+
+alpha = 2.5    lam0 = 0.79488  lamInf = 0.77280  (độ rộng khoảng 2.78% của lam0)
+   toán tử                 lam  vị trí          dấu sai số w             q*     sai số w (%)
+   Cổ điển             0.79488  trên/bằng lam0  luôn dương                -  +0.000.. +1.419
+   Anh 2017 s=2        0.77136  dưới lamInf     luôn âm                   -  -0.407.. -0.001
+   WLAO 2020 p=0.25    0.78353  trong khoảng    đổi dấu một lần        1.39  -0.095.. +0.692
+   WLAO 2020 p=0.5     0.77132  dưới lamInf     luôn âm                   -  -0.408.. -0.001
+   WLAO 2020 p=1       0.74384  dưới lamInf     luôn âm                   -  -1.892.. -0.003
+   WEL 2025            0.74407  dưới lamInf     luôn âm                   -  -1.876.. -0.003
+   lamInf (cận)        0.77280                                               -0.358.. -0.000
+   Hữu tỷ 2 đầu        b=0.768                                               -0.003.. -0.000
+
+alpha = 3      lam0 = 0.75000  lamInf = 0.71777  (độ rộng khoảng 4.30% của lam0)
+   toán tử                 lam  vị trí          dấu sai số w             q*     sai số w (%)
+   Cổ điển             0.75000  trên/bằng lam0  luôn dương                -  +0.000.. +2.220
+   Anh 2017 s=2        0.72000  trong khoảng    đổi dấu một lần        19.1  -0.483.. +0.155
+   WLAO 2020 p=0.25    0.73662  trong khoảng    đổi dấu một lần        0.99  -0.096.. +1.304
+   WLAO 2020 p=0.5     0.72223  trong khoảng    đổi dấu một lần         8.8  -0.413.. +0.310
+   WLAO 2020 p=1       0.68993  dưới lamInf     luôn âm                   -  -1.966.. -0.003
+   WEL 2025            0.69019  dưới lamInf     luôn âm                   -  -1.948.. -0.003
+   lamInf (cận)        0.71777                                               -0.557.. -0.000
+   Hữu tỷ 2 đầu        b=0.727                                               -0.007.. -0.000
+
+alpha = 4      lam0 = 0.67906  lamInf = 0.62790  (độ rộng khoảng 7.53% của lam0)
+   toán tử                 lam  vị trí          dấu sai số w             q*     sai số w (%)
+   Cổ điển             0.67906  trên/bằng lam0  luôn dương                -  +0.000.. +3.994
+   Anh 2017 s=2        0.63801  trong khoảng    đổi dấu một lần        6.34  -0.630.. +0.802
+   WLAO 2020 p=0.25    0.66286  trong khoảng    đổi dấu một lần       0.705  -0.097.. +2.746
+   WLAO 2020 p=0.5     0.64548  trong khoảng    đổi dấu một lần        2.96  -0.419.. +1.390
+   WLAO 2020 p=1       0.60660  dưới lamInf     luôn âm                   -  -2.016.. -0.004
+   WEL 2025            0.60689  dưới lamInf     luôn âm                   -  -2.000.. -0.004
+   lamInf (cận)        0.62790                                               -0.986.. -0.000
+   Hữu tỷ 2 đầu        b=0.669                                               -0.023.. -0.000
+
+alpha = 5      lam0 = 0.62500  lamInf = 0.55776  (độ rộng khoảng 10.76% của lam0)
+   toán tử                 lam  vị trí          dấu sai số w             q*     sai số w (%)
+   Cổ điển             0.62500  trên/bằng lam0  luôn dương                -  +0.000.. +5.856
+   Anh 2017 s=2        0.57500  trong khoảng    đổi dấu một lần        4.88  -0.768.. +1.534
+   WLAO 2020 p=0.25    0.60700  trong khoảng    đổi dấu một lần       0.593  -0.097.. +4.321
+   WLAO 2020 p=0.5     0.58775  trong khoảng    đổi dấu một lần        2.06  -0.421.. +2.653
+   WLAO 2020 p=1       0.54480  dưới lamInf     luôn âm                   -  -2.045.. -0.004
+   WEL 2025            0.54509  dưới lamInf     luôn âm                   -  -2.030.. -0.004
+   lamInf (cận)        0.55776                                               -1.415.. -0.000
+   Hữu tỷ 2 đầu        b=0.629                                               -0.047.. -0.000
+
+alpha = 7      lam0 = 0.54687  lamInf = 0.45559  (độ rộng khoảng 16.69% của lam0)
+   toán tử                 lam  vị trí          dấu sai số w             q*     sai số w (%)
+   Cổ điển             0.54687  trên/bằng lam0  luôn dương                -  +0.000.. +9.561
+   Anh 2017 s=2        0.48356  trong khoảng    đổi dấu một lần        4.24  -1.019.. +3.024
+   WLAO 2020 p=0.25    0.52691  trong khoảng    đổi dấu một lần       0.496  -0.096.. +7.542
+   WLAO 2020 p=0.5     0.50562  trong khoảng    đổi dấu một lần         1.5  -0.420.. +5.347
+   WLAO 2020 p=1       0.45841  trong khoảng    đổi dấu một lần          61  -2.067.. +0.309
+   WEL 2025            0.45868  trong khoảng    đổi dấu một lần        55.4  -2.053.. +0.339
+   lamInf (cận)        0.45559                                               -2.211.. -0.000
+   Hữu tỷ 2 đầu        b=0.579                                               -0.115.. -0.000
+
+alpha = 9      lam0 = 0.49219  lamInf = 0.38489  (độ rộng khoảng 21.80% của lam0)
+   toán tử                 lam  vị trí          dấu sai số w             q*     sai số w (%)
+   Cổ điển             0.49219  trên/bằng lam0  luôn dương                -  +0.000..+13.082
+   Anh 2017 s=2        0.41971  trong khoảng    đổi dấu một lần        4.21  -1.236.. +4.425
+   WLAO 2020 p=0.25    0.47133  trong khoảng    đổi dấu một lần       0.452  -0.095..+10.661
+   WLAO 2020 p=0.5     0.44916  trong khoảng    đổi dấu một lần         1.3  -0.416.. +8.026
+   WLAO 2020 p=1       0.40022  trong khoảng    đổi dấu một lần        12.5  -2.063.. +1.972
+   WEL 2025            0.40047  trong khoảng    đổi dấu một lần        12.3  -2.050.. +2.004
+   lamInf (cận)        0.38489                                               -2.896.. -0.000
+   Hữu tỷ 2 đầu        b=0.549                                               -0.201.. -0.000
+
+alpha = 10     lam0 = 0.47035  lamInf = 0.35715  (độ rộng khoảng 24.07% của lam0)
+   toán tử                 lam  vị trí          dấu sai số w             q*     sai số w (%)
+   Cổ điển             0.47035  trên/bằng lam0  luôn dương                -  +0.000..+14.759
+   Anh 2017 s=2        0.39435  trong khoảng    đổi dấu một lần        4.27  -1.334.. +5.079
+   WLAO 2020 p=0.25    0.44926  trong khoảng    đổi dấu một lần       0.439  -0.094..+12.157
+   WLAO 2020 p=0.5     0.42687  trong khoảng    đổi dấu một lần        1.24  -0.413.. +9.326
+   WLAO 2020 p=1       0.37755  trong khoảng    đổi dấu một lần        9.77  -2.056.. +2.817
+   WEL 2025            0.37779  trong khoảng    đổi dấu một lần        9.63  -2.044.. +2.850
+   lamInf (cận)        0.35715                                               -3.200.. -0.000
+   Hữu tỷ 2 đầu        b=0.538                                               -0.248.. -0.000
+
+alpha = 11     lam0 = 0.45117  lamInf = 0.33312  (độ rộng khoảng 26.17% của lam0)
+   toán tử                 lam  vị trí          dấu sai số w             q*     sai số w (%)
+   Cổ điển             0.45117  trên/bằng lam0  luôn dương                -  +0.000..+16.378
+   Anh 2017 s=2        0.37219  trong khoảng    đổi dấu một lần        4.34  -1.425.. +5.702
+   WLAO 2020 p=0.25    0.42994  trong khoảng    đổi dấu một lần       0.428  -0.093..+13.607
+   WLAO 2020 p=0.5     0.40743  trong khoảng    đổi dấu một lần        1.19  -0.410..+10.593
+   WLAO 2020 p=1       0.35794  trong khoảng    đổi dấu một lần        8.27  -2.047.. +3.659
+   WEL 2025            0.35817  trong khoảng    đổi dấu một lần        8.17  -2.036.. +3.692
+   lamInf (cận)        0.33312                                               -3.481.. -0.000
+   Hữu tỷ 2 đầu        b=0.528                                               -0.297.. -0.000
+
+5. Đối chiếu IJNLM 2025.
+   Bảng 3 (dao động thuần, sai số = sqrt(lam_op/lamInf) - 1):
+     alpha=0.5  EL  +0.31% (bài +0.31)   WEL  -0.81% (bài -0.81)
+     alpha=3    EL  +2.22% (bài +2.22)   WEL  -1.94% (bài -1.93)
+     alpha=10   EL +14.76% (bài +14.76)   WEL  +2.85% (bài +2.87)
+   Bảng 5, gamma = a = 10 (q = 10^(2n+1)), Anh 2017 s=2 (bài: 0.15 1.53 3.02 4.42 5.70 %):
+     n=1  w_exact=26.8107  w_AW=26.8514  sai số +0.15%
+     n=2  w_exact=236.172  w_AW=239.794  sai số +1.53%
+     n=3  w_exact=2134.46  w_AW=2199.01  sai số +3.02%
+     n=4  w_exact=19618.7  w_AW=20486.8  sai số +4.42%
+     n=5  w_exact=182515  w_AW=192922  sai số +5.70%

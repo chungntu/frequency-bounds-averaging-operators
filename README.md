@@ -1,0 +1,77 @@
+# Two-sided frequency bounds for nonlinear free oscillators and a placement of averaging operators
+
+Research code and notes for the free oscillator
+
+$$\ddot x+\omega_0^2x+\gamma|x|^\alpha\operatorname{sgn}x=0,\qquad x(0)=A,\ \dot x(0)=0,\qquad \alpha>0,\ \alpha\ne1 .$$
+
+Every equivalent-linearization method that uses a fixed averaging operator gives
+$\omega^2=\omega_0^2+\lambda\,\gamma A^{\alpha-1}$ with a **constant** $\lambda$. This includes the classical
+(Krylov–Bogoliubov) average and the weighted averaging operators of Anh–Hai–Hieu (2017), Nguyen–Anh (2020) and
+Nguyen et al. (2025). This repository asks where the **exact** value
+$\lambda(q)=(\omega^2-\omega_0^2)/(\gamma A^{\alpha-1})$ lies, with $q=\gamma A^{\alpha-1}/\omega_0^2$ (the ratio of
+the nonlinear to the linear restoring force at the amplitude), and places each operator relative to it.
+
+## Main results
+
+- **Exact representation.** With $x=A\sin\theta$, $1/\omega=\mathbb E_\theta[(1+qH(\theta))^{-1/2}]$, $\theta$ uniform on
+  $[0,\pi/2]$, $H(\theta)=2(1-\sin^{\alpha+1}\theta)/((\alpha+1)\cos^2\theta)$ (a standard substitution).
+- **Theorem (concavity and monotonicity).** $\omega^2$ is strictly concave in $q$ (Cauchy–Schwarz), so $\lambda(q)$
+  decreases strictly from $\lambda_0=2\langle|\cos|^{\alpha+1}\rangle$ (the classical constant) to $\lambda_\infty$
+  (the pure power-law oscillator), for every $\alpha>0$, $\alpha\ne1$, including $\alpha<1$ and softening springs.
+  For the Duffing oscillator: $0.75\to0.7178$, initial slope $-3/128$.
+- **Theorem (mixed power laws).**
+  $\omega_0^2+\sum_i\lambda_{\infty,i}\gamma_iA^{\alpha_i-1}<\omega^2<\omega_0^2+\sum_i\lambda_{0,i}\gamma_iA^{\alpha_i-1}$.
+- **Sign rule.** An operator with $\lambda_{\rm op}\ge\lambda_0$ always overestimates the frequency, one with
+  $\lambda_{\rm op}\le\lambda_\infty$ always underestimates it, and one in between is exact at a single amplitude $q^\ast$.
+- **Placement of the operators** for 14 values of $\alpha$ in $[0.1,11]$ (`output.txt`, `ranking.csv`): each operator is
+  most accurate in its own range of $\alpha$, consistent with the examples chosen in the original papers.
+
+The upper bound $\omega\le\sqrt{\omega_0^2+\lambda_0\gamma A^{\alpha-1}}$ (classical linearization / first-order
+harmonic balance overestimates the frequency) is due to Benguria and Depassier (1996), for any odd nonlinearity.
+The theorem above sharpens it: their bound is the $q\to0$ end of a monotone function whose other end is
+$\lambda_\infty$. Rational harmonic balance (Beléndez et al. 2009) and the arithmetic–geometric mean give more
+accurate Duffing frequencies; the contribution here is structural, not a more accurate formula.
+
+Full statements, proofs, the complete table and the literature check are in [`NOTES_vi.md`](NOTES_vi.md)
+(Vietnamese).
+
+## Files
+
+| File | Content |
+|---|---|
+| `frequency_bounds.py` | Checks the representation (elliptic integral, ODE), the limits and slope, monotonicity on a grid, the mixed and softening cases; places all operators; reproduces Tables 3 and 5 of Nguyen et al. (2025). About 15 s. |
+| `output.txt`, `ranking.csv` | Output of the script above. |
+| `NOTES_vi.md` | Notes with proofs, the full placement table and the literature check (Vietnamese). |
+| `validation/duffing_weighted_averaging.py` | Cubic Duffing with the Anh–Hai–Hieu (2017) operator, $s=2$, against the exact frequency. |
+| `validation/duffing_wao_2025.py` | Implementation of the Nguyen–Anh (2020) and Nguyen et al. (2025) operators; reproduces Table 7 of the 2020 paper and Tables 4–5 of the 2025 paper. |
+
+## Running
+
+```bash
+pip install -r requirements.txt
+python frequency_bounds.py
+cd validation && python duffing_wao_2025.py
+```
+
+## References
+
+1. N.D. Anh, N.Q. Hai, D.V. Hieu, The equivalent linearization method with a weighted averaging for analyzing of
+   nonlinear vibrating systems, *Lat. Am. J. Solids Struct.* 14(9) (2017) 1723–1740. doi:10.1590/1679-78253488
+2. Anh Tay Nguyen, N.D. Anh, A modified averaging operator with some applications, *Vietnam J. Mech.* 42(3) (2020)
+   341–354. doi:10.15625/0866-7136/15356
+3. Anh Tay Nguyen, N.N. Linh, N.C. Thang, N.A. Ngoc, L.Q. Vinh, N.D. Anh, A novel weighted averaging operator for
+   frequency analysis of nonlinear free vibrations, *Int. J. Non-Linear Mech.* 173 (2025) 105057.
+   doi:10.1016/j.ijnonlinmec.2025.105057
+4. R.D. Benguria, M.C. Depassier, A variational principle for eigenvalue problems of Hamiltonian systems,
+   *Phys. Rev. Lett.* 77 (1996) 2847–2850. doi:10.1103/PhysRevLett.77.2847
+5. R.D. Benguria, M.C. Depassier, Variational calculation of the period of nonlinear oscillators, *J. Stat. Phys.*
+   116 (2004) 923; arXiv:nlin/0409003.
+6. J.D. García-Saldaña, A. Gasull, The period function and the harmonic balance method, *Bull. Sci. Math.* (2015);
+   arXiv:1310.1215.
+7. A. Beléndez, E. Gimeno, T. Beléndez, A. Hernández, Rational harmonic balance based method for conservative
+   nonlinear oscillators: application to the Duffing equation, *Mech. Res. Commun.* 36(6) (2009) 728–734.
+   doi:10.1016/j.mechrescom.2009.03.001
+
+## Status
+
+Research notes; a manuscript is in preparation.
