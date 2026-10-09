@@ -264,3 +264,55 @@ nhưng về độ chính xác nó thua các kết quả đã có. Mục 5 chỉ 
 - Hằng số của WLAO và WEL được tìm bằng cách quét $h$ (4001 điểm, sau đó Brent). Chữ số thứ ba có thể lệch
   so với bài gốc, vì bài gốc quét $h$ thô hơn.
 - Tính luôn-đánh-giá-thấp của hằng số hữu tỷ ở mục 5 mới là quan sát số.
+
+## 8. Chọn tham số trọng số từ hai giới hạn đúng
+
+Script: `parameter_selection.py` (khoảng 20 s). Kết quả: `parameter_selection.txt`.
+
+Bài IJNLM 2025 viết rằng việc chọn dạng giải tích cho tham số nhúng $p$ là "một bài toán phức tạp cần nghiên cứu lâu
+dài". Khung ở mục 2 cho một cách chọn có cơ sở. Mỗi toán tử chỉ là một hằng số $\lambda_{\rm op}$, nên muốn sai số
+tần số lớn nhất nhỏ nhất thì chọn tham số sao cho $\lambda_{\rm op}$ đúng bằng **hằng số minimax** $\lambda_{\rm mm}(\alpha)$.
+Đó là hằng số làm nhỏ nhất $\max_q|\omega_c/\omega-1|$ trên $10^{-3}\le q\le10^7$.
+
+Hai giới hạn đều có dạng đóng:
+$$
+\lambda_0=\frac{2\,\Gamma\big(\tfrac{\alpha+2}2\big)}{\sqrt\pi\,\Gamma\big(\tfrac{\alpha+3}2\big)},\qquad
+\lambda_\infty=\frac{\pi(\alpha+1)}2\left[\frac{\Gamma\big(\tfrac{\alpha+3}{2(\alpha+1)}\big)}{\Gamma\big(\tfrac1{\alpha+1}\big)}\right]^2 .
+$$
+
+| $\alpha$ | $\lambda_{\rm mm}$ | vị trí trong $(\lambda_\infty,\lambda_0)$ | sai số minimax | $s^\ast$ (Anh 2017) | $p^\ast$ (WLAO 2020) | $n^\ast$ (WEL 2025) |
+|---|---|---|---|---|---|---|
+| 0,1 | 1,21099 | 0,162 | 0,20 % | 2,44 | 0,42 | 0,46 |
+| 0,5 | 1,10710 | 0,168 | 0,05 % | 2,36 | 0,21 | 0,35 |
+| 1,5 | 0,91211 | 0,173 | 0,04 % | 2,20 | 0,16 | 0,32 |
+| 2 | 0,83875 | 0,173 | 0,13 % | 2,14 | 0,29 | 0,38 |
+| 3 | 0,72327 | 0,171 | 0,38 % | **2,05** | **0,48** | 0,48 |
+| 4 | 0,63645 | 0,167 | 0,68 % | 1,98 | 0,62 | 0,56 |
+| 5 | 0,56874 | 0,163 | 0,98 % | 1,91 | 0,73 | 0,65 |
+| 7 | 0,46976 | 0,155 | 1,54 % | 1,80 | 0,89 | 0,87 |
+| 9 | 0,40074 | 0,148 | 2,04 % | 1,69 | 1,00 | 1,77 |
+| 11 | 0,34976 | 0,141 | 2,47 % | – | 1,08 | – |
+
+(Bảng đủ 14 giá trị $\alpha$ trong `parameter_selection.txt`. Dấu – là không có nghiệm trong miền tham số.)
+
+**Nhận xét:**
+1. **Vì sao $s=2$ và $p=0{,}5$ tốt cho Duffing.** Với $\alpha=3$, tham số tối ưu là $s^\ast=2{,}05$ và $p^\ast=0{,}48$,
+   rất gần các giá trị mà bài 2017 và bài 2020 đã chọn. Lựa chọn của các bài gốc gần như tối ưu theo nghĩa minimax
+   cho trường hợp bậc ba.
+2. **Quy tắc chọn theo $\alpha$.** $s^\ast$ giảm đều theo $\alpha$ (từ 2,44 xuống 1,61), còn $p^\ast$ nhỏ nhất quanh $\alpha\approx0{,}75$
+   (khoảng 0,1) rồi tăng dần lên 1,08 khi $\alpha=11$. Như vậy không có một giá trị $s$ hay $p$ nào tốt cho mọi bậc phi tuyến; tham số nên đổi theo $\alpha$
+   như trong bảng.
+3. **$\lambda$ của toán tử Anh 2017 không đơn điệu theo $s$.** Nó giảm từ $\lambda_0$ khi $s\to0$, đạt cực tiểu quanh
+   $s\approx1{,}5$, rồi tăng về $1$ khi $s\to\infty$ (trọng số dồn vào lúc biên độ lớn nhất, khi đó $\lambda$ là độ
+   cứng cát tuyến tại $A$). Với $\alpha\ge11$, cực tiểu đó vẫn lớn hơn $\lambda_{\rm mm}$, nên họ toán tử này không
+   đạt được minimax.
+4. **Tham số $n$ của họ siêu ellipse trong WEL 2025 gần như không tác dụng.** Đổi $n$ từ 1 đến 8 chỉ làm $\lambda$ thay
+   đổi tối đa 1,9 %, vì cực tiểu theo $h$ nằm ở $h$ nhỏ, nơi $p_n(h)\approx\pm1$ với mọi $n\ge1$. Muốn đạt minimax khi
+   $\alpha\le7$ phải dùng $n<1$. Đây là lý do WEL 2025 gần như trùng WLAO 2020 với $p=1$ (mục 4).
+5. **Vị trí gần như phổ quát.** $\lambda_{\rm mm}$ luôn nằm ở khoảng 14–17 % độ rộng khoảng tính từ $\lambda_\infty$.
+   Quy tắc dạng đóng $\lambda\approx\lambda_\infty+0{,}16(\lambda_0-\lambda_\infty)$ không cần toán tử nào. Sai số lớn nhất
+   của nó chỉ hơn minimax tối đa 0,33 điểm % (Duffing: 0,39 % so với 0,38 %). Hằng số 0,16 là quan sát số, chưa có giải thích.
+
+**Lưu ý:** về độ chính xác thuần túy, hằng số minimax vẫn kém công thức hữu tỷ ở mục 5 và các phương pháp ở mục 6.1.
+Giá trị của mục này là trả lời câu hỏi "chọn trọng số thế nào" cho các toán tử trung bình, giữ nguyên dạng tuyến tính
+$\omega^2=\omega_0^2+\lambda\gamma A^{\alpha-1}$.
