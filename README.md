@@ -25,6 +25,15 @@ the nonlinear to the linear restoring force at the amplitude), and places each o
   $\lambda_{\rm op}\le\lambda_\infty$ always underestimates it, and one in between is exact at a single amplitude $q^\ast$.
 - **Placement of the operators** for 14 values of $\alpha$ in $[0.1,11]$ (`output.txt`, `ranking.csv`): each operator is
   most accurate in its own range of $\alpha$, consistent with the examples chosen in the original papers.
+- **Choice of weighting parameters** (`parameter_selection.py`): the minimax constant lies at 14–17 % of the
+  bracket $(\lambda_\infty,\lambda_0)$ for every $\alpha$; the parameters that reproduce it are $s^\ast\approx2.05$
+  (Anh 2017) and $p^\ast\approx0.48$ (Nguyen–Anh 2020) for the cubic case, close to the values used in those papers,
+  and they vary with $\alpha$. The exponent $n$ of the superellipse family in Nguyen et al. (2025) barely changes $\lambda$.
+- **Power-mean view** (`power_mean_view.py`): for any odd restoring force, with the energy chord stiffness $K(\theta)$,
+  the exact $\omega^2$ is the power mean of order $-1/2$ of $K$, classical linearization is the arithmetic mean, and
+  $M_{-1}(K)<\omega^2<M_0(K)<M_1(K)$. The parameter-free combination $\sqrt{M_0M_{-1}}$ is accurate to
+  0.0014–0.09 % (Duffing, $x+x^7$, $x+x^3+x^5$, pendulum up to 3 rad, Duffing–harmonic); for Duffing it matches the
+  accuracy of two AGM steps. Outside Duffing these means need one quadrature, as does the exact frequency. The value is conceptual: no linear averaging operator can be exact at all amplitudes.
 
 The upper bound $\omega\le\sqrt{\omega_0^2+\lambda_0\gamma A^{\alpha-1}}$ (classical linearization / first-order
 harmonic balance overestimates the frequency) is due to Benguria and Depassier (1996), for any odd nonlinearity.
@@ -42,6 +51,8 @@ Full statements, proofs, the complete table and the literature check are in [`NO
 | `frequency_bounds.py` | Checks the representation (elliptic integral, ODE), the limits and slope, monotonicity on a grid, the mixed and softening cases; places all operators; reproduces Tables 3 and 5 of Nguyen et al. (2025). About 15 s. |
 | `output.txt`, `ranking.csv` | Output of the script above. |
 | `NOTES_vi.md` | Notes with proofs, the full placement table and the literature check (Vietnamese). |
+| `parameter_selection.py`, `parameter_selection.txt` | Minimax constant and optimal operator parameters $s^\ast$, $p^\ast$, $n^\ast$ for 14 values of $\alpha$. |
+| `power_mean_view.py`, `power_mean_view.txt` | Power-mean bounds and parameter-free formulas for Duffing, $x+x^7$, $x+x^3+x^5$, pendulum, Duffing–harmonic. |
 | `validation/duffing_weighted_averaging.py` | Cubic Duffing with the Anh–Hai–Hieu (2017) operator, $s=2$, against the exact frequency. |
 | `validation/duffing_wao_2025.py` | Implementation of the Nguyen–Anh (2020) and Nguyen et al. (2025) operators; reproduces Table 7 of the 2020 paper and Tables 4–5 of the 2025 paper. |
 

@@ -316,3 +316,53 @@ $$
 **Lưu ý:** về độ chính xác thuần túy, hằng số minimax vẫn kém công thức hữu tỷ ở mục 5 và các phương pháp ở mục 6.1.
 Giá trị của mục này là trả lời câu hỏi "chọn trọng số thế nào" cho các toán tử trung bình, giữ nguyên dạng tuyến tính
 $\omega^2=\omega_0^2+\lambda\gamma A^{\alpha-1}$.
+
+## 9. Tần số là một trung bình lũy thừa: góc nhìn chung cho mọi lực phục hồi lẻ
+
+Script: `power_mean_view.py` (khoảng 2 s). Kết quả: `power_mean_view.txt`.
+
+Bổ đề 1 không cần lực dạng lũy thừa. Với mọi $g$ lẻ, $x(0)=A$, đặt **độ cứng cát tuyến năng lượng**
+$$
+K(\theta)=\frac{2\,[U(A)-U(A\sin\theta)]}{A^2\cos^2\theta},\qquad \theta\ \text{đều trên }[0,\tfrac\pi2].
+$$
+Gọi $M_r(K)=(\mathbb E\,K^r)^{1/r}$ là trung bình lũy thừa bậc $r$ ($M_0=\exp\mathbb E\ln K$). Khi đó:
+
+- **Tần số đúng** là trung bình bậc $-\tfrac12$: $\omega^2=M_{-1/2}(K)$ (Bổ đề 1).
+- **Tuyến tính hóa cổ điển** (cũng là cân bằng điều hòa bậc nhất) là trung bình cộng: $M_1(K)=\mathbb E K=\tfrac2A\langle g(A\cos t)\cos t\rangle$.
+  Chứng minh: tích phân từng phần với $d(\tan\theta)$, như ở mục 2. Với con lắc, $M_1=2J_1(A)/A$.
+- Vì $M_r$ tăng theo $r$, **với mọi $g$**:
+  $$M_{-1}(K)\;<\;\omega^2\;<\;M_0(K)\;<\;M_1(K).$$
+  Cận trên $M_1$ là kết quả của Benguria & Depassier (1996). Trung bình hình học $M_0$ cho cận trên chặt hơn khoảng 3 lần,
+  và trung bình điều hòa $M_{-1}$ cho cận dưới.
+- **Công thức "đối ngẫu".** Khi $K$ ít phân tán, $\ln M_r\approx\ln\mathbb EK+\tfrac{r-1}2\operatorname{Var}K/(\mathbb EK)^2$
+  tuyến tính theo $r$. Vì $-\tfrac12=\tfrac14\cdot1+\tfrac34\cdot(-1)=\tfrac12\cdot0+\tfrac12\cdot(-1)$, ta có hai xấp xỉ
+  **không cần khớp tham số**:
+  $$\omega^2\approx M_1^{1/4}M_{-1}^{3/4},\qquad \omega^2\approx\sqrt{M_0\,M_{-1}} .$$
+  Cũng từ khai triển này: sai số của cách cổ điển xấp xỉ gấp 3 lần sai số của trung bình điều hòa, khớp với số đo
+  (Duffing: $+2{,}22\,\%$ so với $-0{,}75\,\%$).
+
+**Kiểm số** (so với tích phân ODE; $M_{-1/2}$ khớp tới $10^{-9}\,\%$; bất đẳng thức đúng ở mọi điểm):
+
+| Hệ | sai số lớn nhất $M_1^{1/4}M_{-1}^{3/4}$ | sai số lớn nhất $\sqrt{M_0M_{-1}}$ |
+|---|---|---|
+| Duffing $x+x^3$ | 0,012 % | 0,0014 % |
+| $x+|x|^7\operatorname{sgn}x$ | 0,13 % | 0,09 % |
+| $x+x^3+x^5$ | 0,020 % | 0,025 % |
+| con lắc, $A\le3{,}0$ rad | 0,54 % | 0,049 % |
+| Duffing–điều hòa $x^3/(1+x^2)$ | 0,013 % | 0,003 % |
+
+Với Duffing, mọi trung bình đều có dạng đóng: $M_1=1+\tfrac34q$, $M_{-1}=\sqrt{(1+q/2)(1+q)}$, và
+$M_0=\big(\tfrac{\sqrt{1+q/2}+\sqrt{1+q}}2\big)^2$. Đây chính là bước đầu của phép trung bình cộng–nhân (AGM), nên
+$\sqrt{M_0M_{-1}}$ cho cùng độ chính xác với AGM hai bước, một kết quả **đã biết**.
+
+**Đánh giá trung thực:**
+- Ngoài Duffing, $M_0$ và $M_{-1}$ cần một tích phân số, trong khi tần số đúng cũng chỉ cần đúng một tích phân như vậy.
+  Vì vậy các công thức trên **không có lợi về tính toán**.
+- Giá trị của mục này là **khái niệm**. Mọi toán tử trung bình *tuyến tính* (cổ điển hay có trọng số, như của các bài
+  2017, 2020, 2025) đều cho một hằng số $\lambda$, nên không thể đúng ở mọi biên độ. "Toán tử đúng" là một trung bình
+  **phi tuyến**: trung bình lũy thừa bậc $-\tfrac12$ của độ cứng cát tuyến. Cặp $M_1$ (cổ điển, đánh giá cao) và $M_{-1}$
+  (điều hòa, đánh giá thấp) là hai góc nhìn đối ngẫu, và tổ hợp đúng của chúng có trọng số $\tfrac14$–$\tfrac34$ suy ra
+  được, không phải khớp số. Cách nhìn này gợi ý mở rộng các toán tử trung bình có trọng số sang **trung bình lũy thừa có
+  trọng số**.
+- Cần kiểm tài liệu: biểu diễn chu kỳ qua $\int d\theta/\sqrt K$ là chuẩn. Việc gọi tên "trung bình lũy thừa" và đồng nhất
+  $M_1$ với cân bằng điều hòa thì mình chưa thấy ở đâu, nhưng chưa tra kỹ.
